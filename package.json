@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/itslimatime42/burger-time#readme",
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "http": "0.0.0",
