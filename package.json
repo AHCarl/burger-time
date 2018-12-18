@@ -1,0 +1,25 @@
+{
+  "name": "burger-time",
+  "version": "1.0.0",
+  "description": "mod 4 project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itslimatime42/burger-time.git"
+  },
+  "author": "alex carlin & robert schulte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itslimatime42/burger-time/issues"
+  },
+  "homepage": "https://github.com/itslimatime42/burger-time#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "mongoose": "^5.4.0"
+  }
+}
