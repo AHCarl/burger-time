@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import API_KEY from "./API_KEY";
+
+// PROBABLY DELETE THIS LATER
+import { createClient } from '@google/maps'
 
 class User extends Component {
 
@@ -11,7 +14,17 @@ class User extends Component {
     }
   }
 
+  // PROBABLY DELETE THIS LATER
+  apiCall = () => {
+    const googleMapsClient = createClient({
+      key: API_KEY
+    })
+    console.log(googleMapsClient)
+  }
+
   componentDidMount = () => {
+    // DON"T FORGET TO DELETE THIS.APICALL()
+    this.apiCall();
     fetch('http://localhost:5000/api/users')
       .then(response => {
         return response.json();
