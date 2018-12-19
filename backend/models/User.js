@@ -25,8 +25,8 @@ const userSchema = new Schema({
 
 const ModelClass = mongoose.model('users', userSchema)
 
-ModelClass.updateAddress = (newAddress) => {
-    ModelClass.findOne((err, user) => {
+ModelClass.update = (newAddress) => {
+    return ModelClass.findOne((err, user) => {
         if (err) {
             console.log(err);
         } else {
@@ -37,11 +37,10 @@ ModelClass.updateAddress = (newAddress) => {
                         coords: resp.json.results[0].geometry.location
                     };
                     user.save();
-                    console.log('jawn cena')
                 }
             })
         }
-    });
+    })
 }
 
 module.exports = ModelClass

@@ -10,11 +10,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      user: null
     };
   }
 
-  changeAddress = (newAddress) => {
+  patchAddress = (newAddress) => {
     fetch(usersApiUrl, {
       method: 'PATCH',
       headers: {
@@ -22,13 +22,13 @@ class App extends Component {
       },
       body: JSON.stringify({ newAddress: newAddress })
     })
+    // figure out how to re-render
   }
 
-  componentDidMount = () => {
+  getUsers = () => {
     fetch(usersApiUrl)
-      .then(response => {
-        return response.json();
-      }).then(data => {
+      .then(resp => resp.json())
+      .then(data => {
         let users = data.map((user) => {
           return (
             <div key={user._id}>
@@ -39,15 +39,19 @@ class App extends Component {
             </div>
           )
         })
-        this.setState({ users: users })
+        this.setState({ user: users[0] })
       })
+  }
+
+  componentDidMount = () => {
+    this.getUsers()
   }
 
   render() {
     return (
       <div className="App">
-        <User user={this.state.users[0]} />
-        <UserLocation handleSubmit={this.changeAddress} />
+        <User user={this.state.user} />
+        <UserLocation handleSubmit={this.patchAddress} />
       </div>
     );
   }
