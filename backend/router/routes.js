@@ -5,5 +5,6 @@ module.exports = (app) => {
         res.send({ msg: 'oh herrrrrrro!' })
     })
 
-    app.get('/api/users', UserController.readAll)
+    app.get('/api/users', UserController.index)
+    app.patch('/api/users', UserController.update)
 }
