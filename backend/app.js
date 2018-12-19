@@ -14,7 +14,7 @@ const server = http.createServer(app);
 const port = 5000;
 
 console.log('Connecting to Local Database.');
-mongoose.connect('mongodb://localhost/your-local-db-name', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/burger-time-db', { useNewUrlParser: true })
 
 server.listen(port);
 console.log(`NodeJS Server running on port ${port}.`);
