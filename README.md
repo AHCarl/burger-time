@@ -12,3 +12,4 @@ isn't it obvious
 
 - react google maps component: https://www.npmjs.com/package/google-maps-react
 - google maps directions API?
+- google autocomplete API? (new google.maps.places.Autocomplete())
