@@ -1,3 +1,6 @@
 node_modules
 
 API_KEY.js
+
+frontend/node_modules
+backend/node_modules
