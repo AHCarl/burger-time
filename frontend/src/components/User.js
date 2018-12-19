@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import API_KEY from "./API_KEY";
-
-// PROBABLY DELETE THIS LATER
-import { createClient } from '@google/maps'
+import '../stylesheets/App.css';
+// import API_KEY from "./API_KEY";
+// import { createClient } from "@google/maps";
 
 class User extends Component {
 
@@ -14,17 +12,7 @@ class User extends Component {
     }
   }
 
-  // PROBABLY DELETE THIS LATER
-  apiCall = () => {
-    const googleMapsClient = createClient({
-      key: API_KEY
-    })
-    console.log(googleMapsClient)
-  }
-
   componentDidMount = () => {
-    // DON"T FORGET TO DELETE THIS.APICALL()
-    this.apiCall();
     fetch('http://localhost:5000/api/users')
       .then(response => {
         return response.json();
@@ -34,8 +22,8 @@ class User extends Component {
           return (
             <div key={user._id}>
               <p>UserName: {user.userName}</p>
-              <p>Last Name: {user.lastName}</p>
               <p>Email: {user.email}</p>
+              <p>Location: {user.location.address}</p>
               <hr />
             </div>
           )

@@ -1,12 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const googleMapsClient = require("../googleApi/googleMapsClient");
 
 const userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true, required: true },
     password: { type: String, required: true },
     userName: { type: String, required: true },
     preferences: { time: Number, price: Number },
-    location: { name: String, geocode: Number },
+    location: { 
+        address: String,
+        coords: {
+            lat: Number,
+            lng: Number
+        }
+    },
     burgers: [
         { name: String,
           location: Object,
@@ -27,7 +34,13 @@ ModelClass.find({}, (err, users) => {
             password: '1234',
             userName: 'Alan',
             preferences: {time: 11, price: 2},
-            location: {name: 'WeWork', geocode: 9121},
+            location: {
+                address: '',
+                coords: {
+                    lat: null,
+                    lng: null
+                }
+            },
             burgers: [
                 {
                     name: "Hubcap",
@@ -44,14 +57,16 @@ ModelClass.find({}, (err, users) => {
             ]
 
         })
-        // const user2 = new ModelClass({
-        //     email: 'test2@example.com',
-        //     password: '1234',
-        //     userName: 'Josh',
-        // })
-        user1.save()
-        // user2.save()
-        console.log('Seeded DB with 2 new users.');
+
+        googleMapsClient.geocode({address: "708 Main St Houston TX"}, (err, resp) => {
+            if (!err) {
+                user1.location = {
+                    address: resp.json.results[0].formatted_address,
+                    coords: resp.json.results[0].geometry.location
+                };
+                user1.save();
+            }
+        })
     }
 })
 
