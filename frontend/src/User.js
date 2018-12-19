@@ -30,9 +30,10 @@ class User extends Component {
         return response.json();
       }).then(data => {
         let users = data.map((user) => {
+          console.log(user)
           return (
             <div key={user._id}>
-              <p>First Name: {user.firstName}</p>
+              <p>UserName: {user.userName}</p>
               <p>Last Name: {user.lastName}</p>
               <p>Email: {user.email}</p>
               <hr />
