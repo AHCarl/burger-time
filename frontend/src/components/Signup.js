@@ -29,7 +29,7 @@ export default class Signup extends React.Component {
                 <label>Username: </label>
                 <input name="userName" value={this.state.userName} onChange={this.handleInputChange} />
                 <label>Password: </label>
-                <input name="password" value={this.state.password} onChange={this.handleInputChange} />
+                <input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
                 <button type="submit" >Sign Up</button>
             </form>
         )

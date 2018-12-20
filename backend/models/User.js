@@ -51,8 +51,8 @@ bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
 
 const ModelClass = mongoose.model('users', userSchema)
 
-ModelClass.update = (newAddress) => {
-    return ModelClass.findOne((err, user) => {
+ModelClass.update = (user, newAddress) => {
+    return ModelClass.findOne({email: user.email}, (err, user) => {
         if (err) {
             console.log(err);
         } else {
