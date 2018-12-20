@@ -3,3 +3,5 @@ API_KEY.js
 
 frontend/node_modules
 backend/node_modules
+
+backend/config
