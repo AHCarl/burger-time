@@ -1,12 +1,11 @@
 import React from 'react'
 
-export default class Signup extends React.Component {
+export default class Signin extends React.Component {
 
     constructor() {
         super()
         this.state = {
             email: '',
-            userName: '',
             password: ''
         }
     }
@@ -26,11 +25,9 @@ export default class Signup extends React.Component {
             }} >
                 <label>Email: </label>
                 <input name="email" value={this.state.email} onChange={this.handleInputChange} />
-                <label>Username: </label>
-                <input name="userName" value={this.state.userName} onChange={this.handleInputChange} />
                 <label>Password: </label>
                 <input name="password" value={this.state.password} onChange={this.handleInputChange} />
-                <button type="submit" >Sign Up</button>
+                <button type="submit" >Sign In</button>
             </form>
         )
     }
