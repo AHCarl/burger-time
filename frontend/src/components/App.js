@@ -42,7 +42,10 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newAddress)
+      body: JSON.stringify({
+        user: this.state.user,
+        address: newAddress
+      })
     })
     // figure out how to re-render
   }
@@ -120,13 +123,13 @@ class App extends Component {
             if (!signedIn) {
               return <Redirect {...routerProps} to='/signin' />
             } else {
-            return (
-              <div>
-                <Signout {...routerProps} onClick={this.signoutUser} />
-                <User {...routerProps} user={this.state.user} />
-                <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
-              </div>
-            )
+              return (
+                <div>
+                  <Signout {...routerProps} onClick={this.signoutUser} />
+                  <User {...routerProps} user={this.state.user} />
+                  <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
+                </div>
+              )
             }
           } } />
         </div>

@@ -19,7 +19,7 @@ export default class UserLocation extends React.Component {
         return (
             <form onSubmit={(e) => {
                 e.preventDefault()
-                this.props.handleSubmit(this.state);
+                this.props.handleSubmit(this.state.newAddress);
             }} >
                 <label>Change Address:</label>
                 <input value={this.state.newAddress} onChange={this.handleInputChange} />
