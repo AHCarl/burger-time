@@ -23,7 +23,7 @@ isn't it obvious
 
 2. Give User ability to save a burger on their user in database (pass a callback from App
 
-3. Use Maps JavaScript API to embed a map on front-end
+3. Use Maps JavaScript API to embed a map on front-end (google-map-react: https://www.npmjs.com/package/google-map-react)
 
 4. Start working with Distance Matrix API to figure out how to implement
 
