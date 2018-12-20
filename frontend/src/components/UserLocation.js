@@ -5,13 +5,13 @@ export default class UserLocation extends React.Component {
     constructor() {
         super()
         this.state = {
-            input: ''
+            newAddress: ''
         }
     }
 
     handleInputChange = (e) => {
         this.setState({
-            input: e.target.value
+            newAddress: e.target.value
         })
     }
 
@@ -19,10 +19,10 @@ export default class UserLocation extends React.Component {
         return (
             <form onSubmit={(e) => {
                 e.preventDefault()
-                this.props.handleSubmit(this.state.input);
+                this.props.handleSubmit(this.state);
             }} >
                 <label>Change Address:</label>
-                <input value={this.state.input} onChange={this.handleInputChange} />
+                <input value={this.state.newAddress} onChange={this.handleInputChange} />
             </form>
         )
     }
