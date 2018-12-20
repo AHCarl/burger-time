@@ -30,9 +30,9 @@ export default class Signin extends React.Component {
                     this.props.handleSubmit(this.state)
                 }} >
                     <label>Email: </label>
-                    <input name="email" value={this.state.email} onChange={this.handleInputChange} />
+                    <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} />
                     <label>Password: </label>
-                    <input name="password" value={this.state.password} onChange={this.handleInputChange} />
+                    <input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
                     <button type="submit" >Sign In</button>
                 </form>
             </div>

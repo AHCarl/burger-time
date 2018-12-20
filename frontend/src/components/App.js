@@ -105,12 +105,6 @@ class App extends Component {
     this.setState({user: null})
   }
 
-  requireAuth = (nextState, replace) => {
-    if (localStorage.token) {
-      replace({pathname: '/'})
-    }
-  }
-
   render() {
     const signedIn = !!localStorage.token
     return (
