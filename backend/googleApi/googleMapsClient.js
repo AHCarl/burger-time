@@ -1,8 +1,8 @@
 const googleMaps = require("@google/maps");
-const API_KEY = require("./API_KEY");
+const keys = require("../config/keys");
 
 const googleMapsClient = googleMaps.createClient({
-    key: API_KEY
+    key: keys.API_KEY
 })
 
 module.exports = googleMapsClient
