@@ -25,7 +25,7 @@ export default class Signup extends React.Component {
                 this.props.handleSubmit(this.state)
             }} >
                 <label>Email: </label>
-                <input name="email" value={this.state.email} onChange={this.handleInputChange} />
+                <input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
                 <label>Username: </label>
                 <input name="userName" value={this.state.userName} onChange={this.handleInputChange} />
                 <label>Password: </label>
