@@ -19,7 +19,6 @@ class App extends Component {
         email: "",
         password: "",
         userName: "",
-        location: {},
         preferences: {
           time: 0,
           price: 0
@@ -105,6 +104,11 @@ class App extends Component {
     this.setState({user: null})
   }
 
+  // TODO: abstract redirection
+  // redirectTo = (routerProps, route) => {
+  //  if (localStorage.token) return <Redirect {...routerProps} to={route}/>
+  // } 
+
   render() {
     const signedIn = !!localStorage.token
     return (
@@ -113,6 +117,9 @@ class App extends Component {
           <Route exact path='/signup' render={routerProps => <Signup {...routerProps} handleSubmit={this.registerUser} />} />
           <Route exact path='/signin' render={routerProps => signedIn ? <Redirect {...routerProps} to='/' /> : <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
           <Route exact path='/' render={routerProps => {
+            if (!signedIn) {
+              return <Redirect {...routerProps} to='/signin' />
+            } else {
             return (
               <div>
                 <Signout {...routerProps} onClick={this.signoutUser} />
@@ -120,6 +127,7 @@ class App extends Component {
                 <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
               </div>
             )
+            }
           } } />
         </div>
       </Router>
