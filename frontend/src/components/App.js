@@ -6,6 +6,7 @@ import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
 import Signout from './Signout'
+import BurgersContainer from '../containers/BurgersContainer'
 
 const usersApiUrl = "http://localhost:5000/api/users";
 const userApiUrl = "http://localhost:5000/api/user"
@@ -49,24 +50,6 @@ class App extends Component {
     })
     // figure out how to re-render
   }
-
-  // getUsers = () => {
-  //   fetch(usersApiUrl)
-  //     .then(resp => resp.json())
-  //     .then(data => {
-  //       let users = data.map((user) => {
-  //         return (
-  //           <div key={user._id}>
-  //             <p>UserName: {user.userName}</p>
-  //             <p>Email: {user.email}</p>
-  //             {/* <p>Location: {user.location.address}</p> */}
-  //             <hr />
-  //           </div>
-  //         )
-  //       })
-  //       this.setState({ user: users[0] })
-  //     })
-  // }
 
   registerUser = (userData) => {
     fetch(`${userApiUrl}/signup`, {
@@ -128,6 +111,7 @@ class App extends Component {
                   <Signout {...routerProps} onClick={this.signoutUser} />
                   <User {...routerProps} user={this.state.user} />
                   <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
+                  <BurgersContainer {...routerProps} location={this.state.user.location} />
                 </div>
               )
             }
