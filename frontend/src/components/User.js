@@ -10,7 +10,7 @@ class User extends Component {
       <div className="App">
         <p>All Users:</p>
         <hr />
-        {this.props.user}
+        {this.props.userName}
       </div>
     );
   }
