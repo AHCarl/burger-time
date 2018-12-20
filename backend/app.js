@@ -3,6 +3,7 @@ const http = require("http");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const router = require("./router/routes");
 
