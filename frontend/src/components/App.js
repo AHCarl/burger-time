@@ -5,6 +5,7 @@ import UserLocation from './UserLocation'
 import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
+import Signout from './Signout'
 
 const usersApiUrl = "http://localhost:5000/api/users";
 const userApiUrl = "http://localhost:5000/api/user"
@@ -14,7 +15,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      error: null
     };
   }
 
@@ -29,23 +31,23 @@ class App extends Component {
     // figure out how to re-render
   }
 
-  getUsers = () => {
-    fetch(usersApiUrl)
-      .then(resp => resp.json())
-      .then(data => {
-        let users = data.map((user) => {
-          return (
-            <div key={user._id}>
-              <p>UserName: {user.userName}</p>
-              <p>Email: {user.email}</p>
-              {/* <p>Location: {user.location.address}</p> */}
-              <hr />
-            </div>
-          )
-        })
-        this.setState({ user: users[0] })
-      })
-  }
+  // getUsers = () => {
+  //   fetch(usersApiUrl)
+  //     .then(resp => resp.json())
+  //     .then(data => {
+  //       let users = data.map((user) => {
+  //         return (
+  //           <div key={user._id}>
+  //             <p>UserName: {user.userName}</p>
+  //             <p>Email: {user.email}</p>
+  //             {/* <p>Location: {user.location.address}</p> */}
+  //             <hr />
+  //           </div>
+  //         )
+  //       })
+  //       this.setState({ user: users[0] })
+  //     })
+  // }
 
   registerUser = (userData) => {
     fetch(`${userApiUrl}/signup`, {
@@ -65,14 +67,25 @@ class App extends Component {
       },
       body: JSON.stringify(userData)
     })
-    .then(resp => resp.json())
+    .then((resp) => {
+      return resp.ok ? resp.json() : resp.statusText
+    })
     .then(resp => {
-      localStorage.setItem('token', resp.token)
+      if (resp === "Unauthorized") {
+        this.setState({ error: "Incorrect Login Info"})
+      } else {
+        localStorage.setItem('token', resp.token)
+        this.setState({
+          user: resp.user,
+          error: null
+        })
+      }
     })
   }
 
-  componentDidMount = () => {
-    this.getUsers()
+  signoutUser = () => {
+    localStorage.removeItem('token')
+    this.setState({user: null})
   }
 
   render() {
@@ -80,10 +93,11 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path='/signup' render={routerProps => <Signup {...routerProps} handleSubmit={this.registerUser} />} />
-          <Route exact path='/signin' render={routerProps => <Signin {...routerProps} handleSubmit={this.signinUser} />} />
+          <Route exact path='/signin' render={routerProps => <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
           <Route exact path='/' render={routerProps => {
             return (
               <div>
+                <Signout {...routerProps} onClick={this.signoutUser} />
                 <User {...routerProps} user={this.state.user} />
                 <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
               </div>
