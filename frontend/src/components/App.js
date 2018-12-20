@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import '../stylesheets/App.css';
 import UserLocation from './UserLocation'
 import User from './User'
+import Signup from './Signup'
 
 const usersApiUrl = "http://localhost:5000/api/users";
+const userApiUrl = "http://localhost:5000/api/user"
 
 class App extends Component {
 
@@ -20,7 +23,7 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ newAddress: newAddress })
+      body: JSON.stringify(newAddress)
     })
     // figure out how to re-render
   }
@@ -34,7 +37,7 @@ class App extends Component {
             <div key={user._id}>
               <p>UserName: {user.userName}</p>
               <p>Email: {user.email}</p>
-              <p>Location: {user.location.address}</p>
+              {/* <p>Location: {user.location.address}</p> */}
               <hr />
             </div>
           )
@@ -43,16 +46,29 @@ class App extends Component {
       })
   }
 
+  registerUser = (userData) => {
+    fetch(`${userApiUrl}/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+  }
+
   componentDidMount = () => {
     this.getUsers()
   }
 
   render() {
     return (
-      <div className="App">
-        <User user={this.state.user} />
-        <UserLocation handleSubmit={this.patchAddress} />
-      </div>
+      <Router>
+        <div className="App">
+          <Signup handleSubmit={this.registerUser} />
+          <User user={this.state.user} />
+          <UserLocation handleSubmit={this.patchAddress} />
+        </div>
+      </Router>
     );
   }
 }
