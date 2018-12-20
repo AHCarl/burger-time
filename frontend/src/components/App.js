@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import '../stylesheets/App.css';
 import UserLocation from './UserLocation'
 import User from './User'
@@ -15,7 +15,24 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null,
+      user: {
+        email: "",
+        password: "",
+        userName: "",
+        location: {},
+        preferences: {
+          time: 0,
+          price: 0
+        },
+        location: {
+          address: "",
+          coords: {
+            lat: 0,
+            long: 0
+          }
+        },
+        burgers: []
+      },
       error: null
     };
   }
@@ -88,12 +105,19 @@ class App extends Component {
     this.setState({user: null})
   }
 
+  requireAuth = (nextState, replace) => {
+    if (localStorage.token) {
+      replace({pathname: '/'})
+    }
+  }
+
   render() {
+    const signedIn = !!localStorage.token
     return (
       <Router>
         <div className="App">
           <Route exact path='/signup' render={routerProps => <Signup {...routerProps} handleSubmit={this.registerUser} />} />
-          <Route exact path='/signin' render={routerProps => <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
+          <Route exact path='/signin' render={routerProps => signedIn ? <Redirect {...routerProps} to='/' /> : <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
           <Route exact path='/' render={routerProps => {
             return (
               <div>
