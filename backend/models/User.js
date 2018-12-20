@@ -52,18 +52,18 @@ bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
 const ModelClass = mongoose.model('users', userSchema)
 
 ModelClass.update = (user, newAddress) => {
-    return ModelClass.findOne({email: user.email}, (err, user) => {
-        if (err) {
-            console.log(err);
-        } else {
-            googleMapsClient.geocode({ address: newAddress }, (err, resp) => {
-                if (!err) {
-                    user.location = {
-                        address: resp.json.results[0].formatted_address,
-                        coords: resp.json.results[0].geometry.location
-                    };
-                    user.save();
-                }
+    googleMapsClient.geocode({address: newAddress}, (err, resp) => {
+        if (!err) {
+
+            const location = {
+                address: resp.json.results[0].formatted_address,
+                coords: resp.json.results[0].geometry.location
+            }
+            
+            ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
+                if (err) { 
+                    console.log(err);
+                } 
             })
         }
     })
