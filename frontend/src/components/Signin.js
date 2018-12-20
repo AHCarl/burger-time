@@ -17,18 +17,25 @@ export default class Signin extends React.Component {
         })
     }
 
+    displayError = () => {
+        return this.props.error && <p>{this.props.error}</p>
+    }
+
     render() {
         return (
-            <form onSubmit={e => {
-                e.preventDefault()
-                this.props.handleSubmit(this.state)
-            }} >
-                <label>Email: </label>
-                <input name="email" value={this.state.email} onChange={this.handleInputChange} />
-                <label>Password: </label>
-                <input name="password" value={this.state.password} onChange={this.handleInputChange} />
-                <button type="submit" >Sign In</button>
-            </form>
+            <div>
+                {this.displayError()}
+                <form onSubmit={e => {
+                    e.preventDefault()
+                    this.props.handleSubmit(this.state)
+                }} >
+                    <label>Email: </label>
+                    <input name="email" value={this.state.email} onChange={this.handleInputChange} />
+                    <label>Password: </label>
+                    <input name="password" value={this.state.password} onChange={this.handleInputChange} />
+                    <button type="submit" >Sign In</button>
+                </form>
+            </div>
         )
     }
 }
