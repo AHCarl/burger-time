@@ -14,7 +14,7 @@ module.exports = (app) => {
         res.send({msg: 'oh herrrrrrro!'})
       })
     
-    app.get('/api/test', requireAuth, (req, res) => {
+    app.get('/api/auth', requireAuth, (req, res) => {
         res.send({ user: req.user })
     })
 

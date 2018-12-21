@@ -101,7 +101,7 @@ class App extends Component {
 
   getCurrentUser = () => {
     if (localStorage.token) {
-      fetch("http://localhost:5000/api/test", {
+      fetch("http://localhost:5000/api/auth", {
         headers: {
           'Authorization': localStorage.token
         }
