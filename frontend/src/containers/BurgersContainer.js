@@ -7,7 +7,7 @@ export default class BurgersContainer extends React.Component {
         return (
             <div>
                 <p>Burger Content based on: {this.props.location.address}</p>
-                <div style={{ height: '80vh', width: '100%' }}>
+                <div style={{ height: '80vh', width: '50%', float: 'right' }}>
                     <GoogleMapReact bootstrapURLKeys={{ key: API_KEY }} defaultCenter={this.props.location.coords} defaultZoom={14} />
                 </div>
             </div>
