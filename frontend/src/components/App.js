@@ -76,11 +76,7 @@ class App extends Component {
       if (resp === "Unauthorized") {
         this.setState({ error: "Incorrect Login Info"})
       } else {
-        localStorage.setItem('token', resp.token)
-        this.setState({
-          user: resp.user,
-          error: null
-        })
+        this.setCurrentUser(resp)
       }
     })
   }
@@ -95,7 +91,15 @@ class App extends Component {
   //  if (localStorage.token) return <Redirect {...routerProps} to={route}/>
   // }
 
-  componentDidMount = () => {
+  setCurrentUser = (data) => {
+    localStorage.setItem('token', data.token)
+    this.setState({
+      user: data.user,
+      error: null
+    })
+  }
+
+  getCurrentUser = () => {
     if (localStorage.token) {
       fetch("http://localhost:5000/api/test", {
         headers: {
@@ -105,6 +109,10 @@ class App extends Component {
       .then(resp => resp.json())
       .then(resp => this.setState({user: resp.user}))
     }
+  }
+
+  componentDidMount = () => {
+    this.getCurrentUser()
   }
 
   render() {
