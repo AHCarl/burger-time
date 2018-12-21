@@ -27,7 +27,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 })
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: config.jwtSecret
 }
 
@@ -47,3 +47,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 
 passport.use(jwtLogin)
 passport.use(localLogin)
+module.exports = passport

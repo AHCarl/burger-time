@@ -69,7 +69,7 @@ class App extends Component {
       },
       body: JSON.stringify(userData)
     })
-    .then((resp) => {
+    .then(resp => {
       return resp.ok ? resp.json() : resp.statusText
     })
     .then(resp => {
@@ -93,7 +93,19 @@ class App extends Component {
   // TODO: abstract redirection
   // redirectTo = (routerProps, route) => {
   //  if (localStorage.token) return <Redirect {...routerProps} to={route}/>
-  // } 
+  // }
+
+  componentDidMount = () => {
+    if (localStorage.token) {
+      fetch("http://localhost:5000/api/test", {
+        headers: {
+          'Authorization': localStorage.token
+        }
+      })
+      .then(resp => resp.json())
+      .then(resp => this.setState({user: resp.user}))
+    }
+  }
 
   render() {
     const signedIn = !!localStorage.token
