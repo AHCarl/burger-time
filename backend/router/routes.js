@@ -10,10 +10,6 @@ const requireSignin = passport.authenticate('local', {session: false})
 
 module.exports = (app) => {
 
-    app.get('/api/test-noauth', (req, res) => {
-        res.send({msg: 'oh herrrrrrro!'})
-      })
-    
     app.get('/api/auth', requireAuth, (req, res) => {
         res.send({ user: req.user })
     })

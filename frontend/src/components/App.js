@@ -48,7 +48,6 @@ class App extends Component {
         address: newAddress
       })
     })
-    // figure out how to re-render
   }
 
   registerUser = (userData) => {
@@ -112,6 +111,10 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    this.getCurrentUser()
+  }
+  
+  componentDidUpdate = () => {
     this.getCurrentUser()
   }
 
