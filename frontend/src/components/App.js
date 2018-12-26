@@ -38,6 +38,7 @@ class App extends Component {
   }
 
   patchAddress = (newAddress) => {
+    // console.log(newAddress)
     fetch(usersApiUrl, {
       method: 'PATCH',
       headers: {
@@ -115,7 +116,7 @@ class App extends Component {
   }
   
   componentDidUpdate = () => {
-    this.getCurrentUser()
+    // this.getCurrentUser()
   }
 
   render() {
