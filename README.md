@@ -28,3 +28,14 @@ isn't it obvious
 4. Start working with Distance Matrix API to figure out how to implement
 
 5. Start building some nested routes in BurgersContainer
+
+6. Modify backend routes from "users" to "user/:id"
+
+
+######## ALEX ############
+1. get Places API working (using the maps Client object) => returning the proper data into the frontend
+
+
+######## ROBERT ###########
+1. address re-render working properly
+2. start building React component to handle each Place
