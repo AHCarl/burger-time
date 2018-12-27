@@ -51,7 +51,7 @@ bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
 
 const ModelClass = mongoose.model('users', userSchema)
 
-ModelClass.update = (user, newAddress) => {
+ModelClass.update = (user, newAddress, res) => {
     googleMapsClient.geocode({address: newAddress}, (err, resp) => {
         if (!err) {
 
@@ -63,7 +63,10 @@ ModelClass.update = (user, newAddress) => {
             ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
                 if (err) { 
                     console.log(err);
-                } 
+                } else {
+                    user.location = location
+                    res.status(200).json(user);
+                }
             })
         }
     })

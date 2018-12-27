@@ -37,5 +37,5 @@ isn't it obvious
 
 
 ######## ROBERT ###########
-1. address re-render working properly
+1. DONE - address re-render working properly 
 2. start building React component to handle each Place
