@@ -38,7 +38,6 @@ class App extends Component {
   }
 
   patchAddress = (newAddress) => {
-    // console.log(newAddress)
     fetch(usersApiUrl, {
       method: 'PATCH',
       headers: {
@@ -48,6 +47,10 @@ class App extends Component {
         user: this.state.user,
         address: newAddress
       })
+    })
+    .then(resp => resp.json())
+    .then(user => {
+      this.setState({ user })
     })
   }
 
@@ -113,10 +116,6 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getCurrentUser()
-  }
-  
-  componentDidUpdate = () => {
-    // this.getCurrentUser()
   }
 
   render() {
