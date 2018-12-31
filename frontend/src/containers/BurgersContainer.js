@@ -1,15 +1,33 @@
 import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import API_KEY from '../api/API_KEY'
+import PlacesContainer from './PlacesContainer'
+import MapContainer from './MapContainer'
+import Places from '../api/places'
 
 export default class BurgersContainer extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            places: []
+        }
+    }
+
+    getPlaces = () => {
+        // PLACES API FETCH WILL REPLACE THIS CODE!
+        this.setState({
+            places: Places.results.slice(0, 8)
+        })
+    }
+
+    componentDidMount = () => {
+        this.getPlaces()
+    }
+
     render() {
         return (
             <div>
-                <p>Burger Content based on: {this.props.location.address}</p>
-                <div style={{ height: '80vh', width: '50%', float: 'right', filter: 'drop-shadow(16px 16px 10px black)' }}>
-                    <GoogleMapReact bootstrapURLKeys={{ key: API_KEY }} center={this.props.location.coords} zoom={14} />
-                </div>
+                <PlacesContainer address={this.props.location.address} places={this.state.places} />
+                <MapContainer coords={this.props.location.coords} places={this.state.places} />
             </div>
         )
     }
