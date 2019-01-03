@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import '../stylesheets/App.css';
-import UserLocation from './UserLocation'
+import LocationForm from './LocationForm'
 import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
@@ -118,6 +118,10 @@ class App extends Component {
     console.log(restaurantName)
   }
 
+  toggleLocationForm = () => {
+
+  }
+
   componentDidMount = () => {
     this.getCurrentUser()
   }
@@ -136,8 +140,7 @@ class App extends Component {
               return (
                 <React.Fragment>
                   <User {...routerProps} user={this.state.user} />
-                  <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
-                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} logout={this.signoutUser} />
+                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} toggleAddressForm={this.toggleLocationForm} patchAddress={this.patchAddress} logout={this.signoutUser} />
                 </React.Fragment>
               )
             }
