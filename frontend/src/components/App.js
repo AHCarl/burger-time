@@ -5,7 +5,6 @@ import UserLocation from './UserLocation'
 import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
-import Signout from './Signout'
 import BurgersContainer from '../containers/BurgersContainer'
 
 const usersApiUrl = "http://localhost:5000/api/users";
@@ -114,6 +113,11 @@ class App extends Component {
     }
   }
 
+  getDirections = (restaurantName) => {
+    // PUT DIRECTIONS API LOGIC HERE
+    console.log(restaurantName)
+  }
+
   componentDidMount = () => {
     this.getCurrentUser()
   }
@@ -130,12 +134,11 @@ class App extends Component {
               return <Redirect {...routerProps} to='/signin' />
             } else {
               return (
-                <div>
-                  <Signout {...routerProps} onClick={this.signoutUser} />
+                <React.Fragment>
                   <User {...routerProps} user={this.state.user} />
                   <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
-                  <BurgersContainer {...routerProps} location={this.state.user.location} />
-                </div>
+                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} logout={this.signoutUser} />
+                </React.Fragment>
               )
             }
           } } />
