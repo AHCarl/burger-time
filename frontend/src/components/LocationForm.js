@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class UserLocation extends React.Component {
+export default class LocationForm extends React.Component {
 
     constructor() {
         super()
@@ -30,6 +30,7 @@ export default class UserLocation extends React.Component {
             }} >
                 <label>Change Address:</label>
                 <input value={this.state.newAddress} onChange={this.handleInputChange} />
+                <button type='submit'>Submit</button>
             </form>
         )
     }
