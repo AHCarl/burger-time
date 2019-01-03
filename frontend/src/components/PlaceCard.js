@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon, Image, Grid } from "semantic-ui-react";
+import { Card, Image, Grid } from "semantic-ui-react";
 
 // export default class PlaceCard extends React.Component {
 //     render () {
@@ -22,9 +22,9 @@ const PlaceCard = (props) => {
     return (
         <Grid.Column>
             <Card>
-                {/* <Image size='mini' src='https://freeiconshop.com/wp-content/uploads/edd/burger-outline-filled.png' /> */}
+                <Image width='40px' height='40px' src='https://freeiconshop.com/wp-content/uploads/edd/burger-outline-filled.png' />
                 <Card.Content>
-                    <Card.Header>{props.name}</Card.Header>
+                    <Card.Header>{props.rank}. {props.name}</Card.Header>
                     <Card.Meta>
                         <span className='rating'>Rating: {props.rating}</span>
                     </Card.Meta>
@@ -32,6 +32,7 @@ const PlaceCard = (props) => {
                         <span className='price'>Price: {props.price_level}</span>
                     </Card.Meta>
                 </Card.Content>
+                <br/>
             </Card>
         </Grid.Column>
     )

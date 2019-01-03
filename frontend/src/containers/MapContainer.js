@@ -7,7 +7,7 @@ export default class MapContainer extends React.Component {
 
     displayPlaces = (places) => {
         return places.map((place, index) => {
-            return <Marker key={index} lat={place.geometry.location.lat} lng={place.geometry.location.lng} name={place.name} />;
+            return <Marker key={index} rank={index + 1} lat={place.geometry.location.lat} lng={place.geometry.location.lng} name={place.name} />;
         })
     }
 
