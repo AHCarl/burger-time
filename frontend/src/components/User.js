@@ -7,6 +7,7 @@ class User extends Component {
     return (
       <div className="App">
         <p>Hello, {this.props.user.userName}!</p>
+        <p>Address: {this.props.user.location.address}</p>
       </div>
     );
   }

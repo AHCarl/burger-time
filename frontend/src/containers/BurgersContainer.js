@@ -15,7 +15,7 @@ export default class BurgersContainer extends React.Component {
     getPlaces = () => {
         // PLACES API FETCH WILL REPLACE THIS CODE!
         this.setState({
-            places: Places.results.slice(0, 8)
+            places: Places.results.slice(0, 6)
         })
     }
 
