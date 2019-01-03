@@ -23,7 +23,7 @@ export default class UserLocation extends React.Component {
 
     render() {
         return (
-            <form onSubmit={(e) => {
+            <form className="App" onSubmit={(e) => {
                 e.preventDefault()
                 this.props.handleSubmit(this.state.newAddress);
                 this.clearInput()

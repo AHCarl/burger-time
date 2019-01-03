@@ -122,7 +122,7 @@ class App extends Component {
     const signedIn = !!localStorage.token
     return (
       <Router>
-        <div className="App">
+        <div>
           <Route exact path='/signup' render={routerProps => <Signup {...routerProps} handleSubmit={this.registerUser} />} />
           <Route exact path='/signin' render={routerProps => signedIn ? <Redirect {...routerProps} to='/' /> : <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
           <Route exact path='/' render={routerProps => {
