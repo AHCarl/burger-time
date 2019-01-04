@@ -59,14 +59,24 @@ ModelClass.update = (user, newAddress, res) => {
                             address: resp.json.results[0].formatted_address,
                             coords: resp.json.results[0].geometry.location
                         }
-        ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
-            if (err) { 
-                console.log(err);
-            } else {
-                user.location = location
-                !!res && res.status(200).json(user);
-            }
-        })
+        return location
+        // ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
+        //     if (err) { 
+        //         console.log(err);
+        //     } else {
+        //         user.location = location
+        //         !!res && res.status(200).json(user);
+        //     }
+        // })
+    })
+    .then((res) => {
+        console.log(res)
+        googleMapsClient.placesNearby({location: [res.coords.lat, res.coords.lng],
+        type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
+        maxprice: 2, opennow: true}).asPromise()
+        .then((re) => {
+            console.log(re)
+        }).catch((err) => console.log(err))
     })
     .catch((err) => {
         console.log(err)
