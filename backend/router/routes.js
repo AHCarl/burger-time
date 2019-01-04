@@ -17,6 +17,6 @@ module.exports = (app) => {
     app.post('/api/user/signup', Authentication.signup)
     app.post('/api/user/signin', requireSignin, Authentication.signin)
 
-    app.get('/api/users', UserController.index)
+    // app.get('/api/users', UserController.index)
     app.patch('/api/users', UserController.update)
 }

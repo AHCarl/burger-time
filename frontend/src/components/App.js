@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import '../stylesheets/App.css';
-import UserLocation from './UserLocation'
+// import LocationForm from './LocationForm'
 import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
-import Signout from './Signout'
 import BurgersContainer from '../containers/BurgersContainer'
 
 const usersApiUrl = "http://localhost:5000/api/users";
@@ -114,6 +113,15 @@ class App extends Component {
     }
   }
 
+  getDirections = (restaurantName) => {
+    // PUT DIRECTIONS API LOGIC HERE
+    console.log(restaurantName)
+  }
+
+  toggleLoginForm = (name) => {
+    console.log(name)
+  }
+
   componentDidMount = () => {
     this.getCurrentUser()
   }
@@ -123,19 +131,17 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path='/signup' render={routerProps => <Signup {...routerProps} handleSubmit={this.registerUser} />} />
+          <Route exact path='/signup' render={routerProps => <Signup {...routerProps} toggleForm={this.toggleLocationForm} handleSubmit={this.registerUser} />} />
           <Route exact path='/signin' render={routerProps => signedIn ? <Redirect {...routerProps} to='/' /> : <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
           <Route exact path='/' render={routerProps => {
             if (!signedIn) {
               return <Redirect {...routerProps} to='/signin' />
             } else {
               return (
-                <div>
-                  <Signout {...routerProps} onClick={this.signoutUser} />
+                <React.Fragment>
                   <User {...routerProps} user={this.state.user} />
-                  <UserLocation {...routerProps} handleSubmit={this.patchAddress} />
-                  <BurgersContainer {...routerProps} location={this.state.user.location} />
-                </div>
+                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} patchAddress={this.patchAddress} logout={this.signoutUser} />
+                </React.Fragment>
               )
             }
           } } />
