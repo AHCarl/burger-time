@@ -12,7 +12,7 @@ export default class BurgersContainer extends React.Component {
         super(props)
         this.state = {
             places: [],
-            display: 'burgers'
+            display: 'Burger Time'
         }
     }
 
@@ -23,13 +23,12 @@ export default class BurgersContainer extends React.Component {
         })
     }
 
-    handleFormToggle = () => {
-        if (this.state.display === 'burgers') {
-            this.setState({display: 'addressForm'})
+    locationFormToggle = () => {
+        if (this.state.display === 'Burger Time') {
+            this.setState({display: 'Change Address'})
         } else {
-            this.setState({display: 'burgers'})
+            this.setState({display: 'Burger Time'})
         }
-        this.props.toggleAddressForm()
     }
 
     componentDidMount = () => {
@@ -39,17 +38,17 @@ export default class BurgersContainer extends React.Component {
     render() {
         let mainDisplay;
 
-        if (this.state.display === 'burgers') {
+        if (this.state.display === 'Burger Time') {
             mainDisplay = <PlacesContainer address={this.props.location.address} places={this.state.places} getDirections={this.props.getDirections} />
         } else {
-            mainDisplay = <LocationForm handleSubmit={this.props.patchAddress} />
+            mainDisplay = <LocationForm handleSubmit={this.props.patchAddress} locationFormToggle={this.locationFormToggle} />
         }
 
         return (
             <Grid columns={4}>
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <SideMenu logout={this.props.logout} toggleAddressForm={this.handleFormToggle} ></SideMenu>
+                        <SideMenu logout={this.props.logout} activeItem={this.state.display} toggleAddressForm={this.locationFormToggle} ></SideMenu>
                     </Grid.Column>
                     <Grid.Column width={6}>
                         {mainDisplay}
