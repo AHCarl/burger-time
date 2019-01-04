@@ -7,7 +7,6 @@ const userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true, required: true },
     password: { type: String, required: true },
     userName: { type: String, required: true },
-    preferences: { time: Number, price: Number },
     location: { 
         address: String,
         coords: {
@@ -18,8 +17,10 @@ const userSchema = new Schema({
     burgers: [
         { name: String,
           location: Object,
-          distance: Number,
-          time: Number
+          distance: String,
+          time: String,
+          price_level: Number,
+          rating: Number
         }
     ]
 })
@@ -51,25 +52,77 @@ bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
 
 const ModelClass = mongoose.model('users', userSchema)
 
-ModelClass.update = (user, newAddress, res) => {
-    googleMapsClient.geocode({address: newAddress}, (err, resp) => {
-        if (!err) {
 
-            const location = {
-                address: resp.json.results[0].formatted_address,
-                coords: resp.json.results[0].geometry.location
-            }
-            
-            ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
-                if (err) { 
-                    console.log(err);
-                } else {
-                    user.location = location
-                    !!res && res.status(200).json(user);
-                }
-            })
-        }
+ModelClass.update = (user, newAddress, res) => {
+    let myLocation
+    googleMapsClient.geocode({address: newAddress}).asPromise()
+    .then((resp) => {
+        myLocation = {
+                            address: resp.json.results[0].formatted_address,
+                            coords: resp.json.results[0].geometry.location
+                        }
+        return myLocation
+        // ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
+        //     if (err) { 
+        //         console.log(err);
+        //     } else {
+        //         user.location = location
+        //         !!res && res.status(200).json(user);
+        //     }
+        // })
     })
+    .then((resp) => {
+        let loc = [resp.coords.lat, resp.coords.lng]
+        googleMapsClient.placesNearby({location: loc,
+        type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
+        maxprice: 2, opennow: true}).asPromise()
+        .then((re) => {
+            console.log(re.json.results)
+            let myPlaces = re.json.results.slice(0,6)
+            let burgs = myPlaces.map((place) => {
+                let burg = {}
+                burg.name = place.name 
+                burg.price_level = place.price_level
+                burg.rating = place.rating
+                burg.location = place.geometry.location
+                return burg
+            })
+            loc.push(burgs)
+            return loc
+        })
+        .then( r => {
+            let origins = [`${r[0]},${r[1]}`]
+            const myBurgers = r[2]
+            let destinations = myBurgers.map(destination => {
+                let lat = destination.location.lat 
+                let lng = destination.location.lng
+                return `${lat},${lng}`
+            })
+            googleMapsClient.distanceMatrix({origins, destinations}).asPromise()
+            .then( response => {
+
+                var i 
+                for (i = 0; i < 6; i++) {
+                    myBurgers[i].distance = response.json.rows[0].elements[i].distance.text
+                    myBurgers[i].time = response.json.rows[0].elements[i].duration.text
+                }
+
+                ModelClass.findOneAndUpdate({email: user.email}, {location: myLocation, burgers: myBurgers}, (err, user) => {
+                    if (err) { 
+                        console.log(err);
+                    } else {
+                        console.log(myLocation)
+                        user.location = myLocation
+                        user.burgers = myBurgers
+                        !!res && res.status(200).json(user);
+                    }
+                })
+            })
+            .catch((err) => console.log(err))
+        })
+        .catch((err) => console.log(err))
+    })
+    .catch((err) => console.log(err))
 }
 
 module.exports = ModelClass

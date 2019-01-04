@@ -19,10 +19,6 @@ class App extends Component {
         email: "",
         password: "",
         userName: "",
-        preferences: {
-          time: 0,
-          price: 0
-        },
         location: {
           address: "",
           coords: {
@@ -34,7 +30,6 @@ class App extends Component {
       },
       error: null,
       loginDisplay: '/signin',
-      places: []
     };
   }
 
@@ -174,7 +169,7 @@ class App extends Component {
               return (
                 <React.Fragment>
                   <User {...routerProps} user={this.state.user} />
-                  <BurgersContainer {...routerProps} location={this.state.user.location} places={this.state.places} getDirections={this.getDirections} patchAddress={this.patchAddress} logout={this.signoutUser} />
+                  <BurgersContainer {...routerProps} location={this.state.user.location} burgers={this.state.user.burgers} getDirections={this.getDirections} patchAddress={this.patchAddress} logout={this.signoutUser} />
                 </React.Fragment>
               )
             }

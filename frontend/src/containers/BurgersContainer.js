@@ -26,7 +26,7 @@ export default class BurgersContainer extends React.Component {
         let mainDisplay;
 
         if (this.state.display === 'Burger Time') {
-            mainDisplay = <PlacesContainer address={this.props.location.address} places={this.props.places} getDirections={this.props.getDirections} />
+            mainDisplay = <PlacesContainer address={this.props.location.address} burgers={this.props.burgers} getDirections={this.props.getDirections} />
         } else {
             mainDisplay = <LocationForm handleSubmit={this.props.patchAddress} locationFormToggle={this.locationFormToggle} />
         }
@@ -41,7 +41,7 @@ export default class BurgersContainer extends React.Component {
                         {mainDisplay}
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <MapContainer coords={this.props.location.coords} places={this.props.places} />
+                        <MapContainer coords={this.props.location.coords} burgers={this.props.burgers} />
                     </Grid.Column>
                     <Grid.Column width={1} />
                 </Grid.Row>

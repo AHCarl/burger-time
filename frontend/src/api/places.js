@@ -1007,4 +1007,32 @@ const places = {
                 "status": "OK"
 }
 
+// { "_id" : ObjectId("5c2fd4b521182a1bda52b244"), 
+// "location" : [ 29.7590441, -95.36359089999999, 
+//     [ 
+//         { "name" : "Burger Theory", "location" : 
+//         { "lat" : 29.7519572, "lng" : -95.3691027 }, 
+//         "distance" : "1.3 km", "time" : "5 mins" }, 
+//         { "name" : "Stack Burger", "location" : 
+//         { "lat" : 29.7518294, "lng" : -95.3726307 }, 
+//         "distance" : "1.5 km", "time" : "5 mins" }, 
+//         { "name" : "Rodeo Goat", "location" : 
+//         { "lat" : 29.7499514, "lng" : -95.35630019999999 }, 
+//         "distance" : "1.9 km", "time" : "9 mins" }, 
+//         { "name" : "Sparkle's Hamburger Spot", "location" : 
+//         { "lat" : 29.7452519, "lng" : -95.35625019999999 }, 
+//         "distance" : "3.1 km", "time" : "9 mins" }, 
+//         { "name" : "Poppa Burger", "location" : 
+//         { "lat" : 29.7741875, "lng" : -95.3604562 }, 
+//         "distance" : "2.4 km", "time" : "8 mins" }, 
+//         { "name" : "Champ-Burger", "location" : 
+//         { "lat" : 29.7497755, "lng" : -95.34035689999999 }, 
+//         "distance" : "3.8 km", "time" : "13 mins" } 
+//     ] ], 
+//     "email" : "alex@example.com", 
+//     "password" : "$2a$10$VFScJHHdsC92HCqqLh0spuIvEQxDhmJe82EJmcpZC1vHD6p7nLPte", 
+//     "userName" : "alex", 
+//     "burgers" : [ { "_id" : ObjectId("5c2fd4b721182a1bda52b24a"), "name" : "Burger Theory", "location" : { "lat" : 29.7519572, "lng" : -95.3691027 }, "distance" : "1.3 km", "time" : "5 mins" }, { "_id" : ObjectId("5c2fd4b721182a1bda52b249"), "name" : "Stack Burger", "location" : { "lat" : 29.7518294, "lng" : -95.3726307 }, "distance" : "1.5 km", "time" : "5 mins" }, { "_id" : ObjectId("5c2fd4b721182a1bda52b248"), "name" : "Rodeo Goat", "location" : { "lat" : 29.7499514, "lng" : -95.35630019999999 }, "distance" : "1.9 km", "time" : "9 mins" }, { "_id" : ObjectId("5c2fd4b721182a1bda52b247"), "name" : "Sparkle's Hamburger Spot", "location" : { "lat" : 29.7452519, "lng" : -95.35625019999999 }, "distance" : "3.1 km", "time" : "9 mins" }, { "_id" : ObjectId("5c2fd4b721182a1bda52b246"), "name" : "Poppa Burger", "location" : { "lat" : 29.7741875, "lng" : -95.3604562 }, "distance" : "2.4 km", "time" : "8 mins" }, { "_id" : ObjectId("5c2fd4b721182a1bda52b245"), "name" : "Champ-Burger", "location" : { "lat" : 29.7497755, "lng" : -95.34035689999999 }, "distance" : "3.8 km", "time" : "13 mins" } ], "__v" : 0 }
+
+
 export default places

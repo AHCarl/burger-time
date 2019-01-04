@@ -35,12 +35,6 @@ exports.signup = (req, res, next) => {
       return res.status(422).send({ error: 'Email is already in use.'})
     }
 
-    // const user = new User({
-    //   email: email,
-    //   password: password,
-    //   userName: userName,
-    //   address: address
-    // })
 
     const user = new User({
       email: email,
