@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import '../stylesheets/App.css';
-// import LocationForm from './LocationForm'
+import '../stylesheets/App.css'
 import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
@@ -33,7 +32,7 @@ class App extends Component {
         burgers: []
       },
       error: null,
-      loginDisplay: 'signin'
+      loginDisplay: '/signin'
     };
   }
 
