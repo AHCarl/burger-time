@@ -10,7 +10,7 @@ export default class PlaceCard extends React.Component {
 
     render () {
         return (
-            <Card>
+            <Card style={{filter: 'drop-shadow(4px 4px 10px black)'}}>
                 <Image width='40px' height='40px' src='https://freeiconshop.com/wp-content/uploads/edd/burger-outline-filled.png' />
                 <Card.Content>
                     <Card.Header>{this.props.rank}. {this.props.name}</Card.Header>
@@ -18,7 +18,7 @@ export default class PlaceCard extends React.Component {
                         <span className='rating'>Rating: {this.props.rating}</span>
                     </Card.Meta>
                     <Card.Meta>
-                        <span className='price'>Price: {'$$$$'.slice(0, this.props.price_level)}</span>
+                        <span className='price'>Price: {'$$$$'.slice(0, this.props.price_level)} (of 4)</span>
                     </Card.Meta>
                 </Card.Content>
                 <Card.Content extra>
