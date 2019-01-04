@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
+import LocationSearchInput from './LocationSearchInput'
 
 export default class LocationForm extends React.Component {
 
@@ -10,9 +11,9 @@ export default class LocationForm extends React.Component {
         }
     }
 
-    handleInputChange = (e) => {
+    handleInputChange = (address) => {
         this.setState({
-            newAddress: e.target.value
+            newAddress: address
         })
     }
 
@@ -33,7 +34,8 @@ export default class LocationForm extends React.Component {
             }} >
                 <Form.Field>
                     <label>Change Address:</label>
-                    <input value={this.state.newAddress} onChange={this.handleInputChange} placeholder='Address' />
+                    {/* <input value={this.state.newAddress} onChange={this.handleInputChange} placeholder='Address' /> */}
+                    <LocationSearchInput value={this.state.newAddress} onChange={this.handleInputChange} />
                 </Form.Field>
                 <Button type='submit'>Submit</Button>
             </Form>
