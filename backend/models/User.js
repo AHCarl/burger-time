@@ -18,8 +18,8 @@ const userSchema = new Schema({
     burgers: [
         { name: String,
           location: Object,
-        //   distance: Number,
-        //   time: Number
+          distance: String,
+          time: String
         }
     ]
 })
@@ -69,40 +69,54 @@ ModelClass.update = (user, newAddress, res) => {
         //     }
         // })
     })
-    .then((res) => {
-        console.log(res)
-        googleMapsClient.placesNearby({location: [res.coords.lat, res.coords.lng],
+    .then((resp) => {
+        let location = [resp.coords.lat, resp.coords.lng]
+        googleMapsClient.placesNearby({location: location,
         type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
         maxprice: 2, opennow: true}).asPromise()
         .then((re) => {
-            console.log(re)
-        }).catch((err) => console.log(err))
+            let myPlaces = re.json.results.slice(0,6)
+            let burgs = myPlaces.map((place) => {
+                let burg = {}
+                burg.name = place.name 
+                burg.location = place.geometry.location
+                return burg
+            })
+            location.push(burgs)
+            return location
+        })
+        .then( r => {
+            let origins = [`${r[0]},${r[1]}`]
+            const myBurgers = r[2]
+            let destinations = myBurgers.map(destination => {
+                let lat = destination.location.lat 
+                let lng = destination.location.lng
+                return `${lat},${lng}`
+            })
+            googleMapsClient.distanceMatrix({origins, destinations}).asPromise()
+            .then( response => {
+
+                var i 
+                for (i = 0; i < 6; i++) {
+                    myBurgers[i].distance = response.json.rows[0].elements[i].distance.text
+                    myBurgers[i].time = response.json.rows[0].elements[i].duration.text
+                }
+
+                ModelClass.findOneAndUpdate({email: user.email}, {location: location, burgers: myBurgers}, (err, user) => {
+                    if (err) { 
+                        console.log(err);
+                    } else {
+                        user.location = location
+                        user.burgers = myBurgers
+                        !!res && res.status(200).json(user);
+                    }
+                })
+            })
+            .catch((err) => console.log(err))
+        })
+        .catch((err) => console.log(err))
     })
-    .catch((err) => {
-        console.log(err)
-    })
+    .catch((err) => console.log(err))
 }
-
-//hardcoded for testing purposes 
-
-
-// googleMapsClient.placesNearby({location: "29.7720111,-95.4125428",
-// type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
-// maxprice: 2, opennow: true}, (err, resp) => {
-//     if (!err) {
-//         let myPlaces = []
-//         resp.json.results.slice(0,6).forEach(place => {
-//             let burger = {} 
-//             burger.name = place.name 
-//             burger.location = place.geometry.location
-//             myPlaces.push(burger)
-//         })
-//         console.log(myPlaces)
-
-    
-//     }
-// })
-
-
 
 module.exports = ModelClass
