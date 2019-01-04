@@ -60,16 +60,8 @@ ModelClass.update = (user, newAddress, res) => {
         myLocation = {
                             address: resp.json.results[0].formatted_address,
                             coords: resp.json.results[0].geometry.location
-                        }
+                    }
         return myLocation
-        // ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
-        //     if (err) { 
-        //         console.log(err);
-        //     } else {
-        //         user.location = location
-        //         !!res && res.status(200).json(user);
-        //     }
-        // })
     })
     .then((resp) => {
         let loc = [resp.coords.lat, resp.coords.lng]
@@ -77,7 +69,6 @@ ModelClass.update = (user, newAddress, res) => {
         type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
         maxprice: 2, opennow: true}).asPromise()
         .then((re) => {
-            console.log(re.json.results)
             let myPlaces = re.json.results.slice(0,6)
             let burgs = myPlaces.map((place) => {
                 let burg = {}
@@ -113,7 +104,15 @@ ModelClass.update = (user, newAddress, res) => {
                     } else {
                         console.log(myLocation)
                         user.location = myLocation
-                        user.burgers = myBurgers
+                        user.burgers = myBurgers.sort((a,b) => {
+                            if (a.time > b.time) {
+                                return 1
+                            } else if (a.time < b.time) {
+                                return -1
+                            } else {
+                                return 0
+                            }
+                        })
                         !!res && res.status(200).json(user);
                     }
                 })

@@ -130,15 +130,10 @@ class App extends Component {
     }
   }
 
-  getPlaces = () => {
-    this.setState({
-      places: Places.results.slice(0, 6)
-    })
-  }
+
 
   componentDidMount = () => {
     this.getCurrentUser()
-    this.getPlaces()
   }
 
   render() {
