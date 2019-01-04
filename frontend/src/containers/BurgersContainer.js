@@ -2,7 +2,6 @@ import React from 'react'
 import PlacesContainer from './PlacesContainer'
 import MapContainer from './MapContainer'
 import {Grid} from 'semantic-ui-react'
-import Places from '../api/places'
 import SideMenu from '../components/SideMenu'
 import LocationForm from '../components/LocationForm'
 
@@ -11,16 +10,8 @@ export default class BurgersContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            places: [],
             display: 'Burger Time'
         }
-    }
-
-    getPlaces = () => {
-        // PLACES API FETCH WILL REPLACE THIS CODE!
-        this.setState({
-            places: Places.results.slice(0, 6)
-        })
     }
 
     locationFormToggle = () => {
@@ -31,15 +22,11 @@ export default class BurgersContainer extends React.Component {
         }
     }
 
-    componentDidMount = () => {
-        this.getPlaces()
-    }
-
     render() {
         let mainDisplay;
 
         if (this.state.display === 'Burger Time') {
-            mainDisplay = <PlacesContainer address={this.props.location.address} places={this.state.places} getDirections={this.props.getDirections} />
+            mainDisplay = <PlacesContainer address={this.props.location.address} places={this.props.places} getDirections={this.props.getDirections} />
         } else {
             mainDisplay = <LocationForm handleSubmit={this.props.patchAddress} locationFormToggle={this.locationFormToggle} />
         }
@@ -54,7 +41,7 @@ export default class BurgersContainer extends React.Component {
                         {mainDisplay}
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <MapContainer coords={this.props.location.coords} places={this.state.places} />
+                        <MapContainer coords={this.props.location.coords} places={this.props.places} />
                     </Grid.Column>
                     <Grid.Column width={1} />
                 </Grid.Row>

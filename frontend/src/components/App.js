@@ -5,6 +5,7 @@ import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
 import BurgersContainer from '../containers/BurgersContainer'
+import Places from "../api/places";
 
 const usersApiUrl = "http://localhost:5000/api/users";
 const userApiUrl = "http://localhost:5000/api/user"
@@ -32,7 +33,8 @@ class App extends Component {
         burgers: []
       },
       error: null,
-      loginDisplay: '/signin'
+      loginDisplay: '/signin',
+      places: []
     };
   }
 
@@ -133,8 +135,15 @@ class App extends Component {
     }
   }
 
+  getPlaces = () => {
+    this.setState({
+      places: Places.results.slice(0, 6)
+    })
+  }
+
   componentDidMount = () => {
     this.getCurrentUser()
+    this.getPlaces()
   }
 
   render() {
@@ -165,7 +174,7 @@ class App extends Component {
               return (
                 <React.Fragment>
                   <User {...routerProps} user={this.state.user} />
-                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} patchAddress={this.patchAddress} logout={this.signoutUser} />
+                  <BurgersContainer {...routerProps} location={this.state.user.location} places={this.state.places} getDirections={this.getDirections} patchAddress={this.patchAddress} logout={this.signoutUser} />
                 </React.Fragment>
               )
             }
