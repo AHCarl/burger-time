@@ -118,7 +118,7 @@ class App extends Component {
     console.log(restaurantName)
   }
 
-  toggleLocationForm = (name) => {
+  toggleLoginForm = (name) => {
     console.log(name)
   }
 
@@ -140,7 +140,7 @@ class App extends Component {
               return (
                 <React.Fragment>
                   <User {...routerProps} user={this.state.user} />
-                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} toggleAddressForm={this.toggleLocationForm} patchAddress={this.patchAddress} logout={this.signoutUser} />
+                  <BurgersContainer {...routerProps} location={this.state.user.location} getDirections={this.getDirections} patchAddress={this.patchAddress} logout={this.signoutUser} />
                 </React.Fragment>
               )
             }

@@ -27,7 +27,9 @@ export default class LocationForm extends React.Component {
             <Form onSubmit={(e) => {
                 e.preventDefault()
                 this.props.handleSubmit(this.state.newAddress);
+                alert(`Address was changed to: ${this.state.newAddress}`)
                 this.clearInput()
+                this.props.locationFormToggle()
             }} >
                 <Form.Field>
                     <label>Change Address:</label>
