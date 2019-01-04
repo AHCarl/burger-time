@@ -7,7 +7,6 @@ const userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true, required: true },
     password: { type: String, required: true },
     userName: { type: String, required: true },
-    preferences: { time: Number, price: Number },
     location: { 
         address: String,
         coords: {
@@ -19,7 +18,9 @@ const userSchema = new Schema({
         { name: String,
           location: Object,
           distance: String,
-          time: String
+          time: String,
+          price_level: Number,
+          rating: Number
         }
     ]
 })
@@ -76,10 +77,13 @@ ModelClass.update = (user, newAddress, res) => {
         type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
         maxprice: 2, opennow: true}).asPromise()
         .then((re) => {
+            console.log(re.json.results)
             let myPlaces = re.json.results.slice(0,6)
             let burgs = myPlaces.map((place) => {
                 let burg = {}
                 burg.name = place.name 
+                burg.price_level = place.price_level
+                burg.rating = place.rating
                 burg.location = place.geometry.location
                 return burg
             })
