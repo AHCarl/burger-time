@@ -13,7 +13,7 @@ export default class PlacesContainer extends React.Component {
     render () {
         return (
             <Card.Group itemsPerRow={2}>
-                {this.listPlaces(this.props.places)}
+                {this.listPlaces(this.props.burgers)}
             </Card.Group>
         )
     }
