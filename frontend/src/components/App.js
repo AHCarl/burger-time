@@ -32,7 +32,8 @@ class App extends Component {
         },
         burgers: []
       },
-      error: null
+      error: null,
+      loginDisplay: 'signin'
     };
   }
 
@@ -61,6 +62,8 @@ class App extends Component {
       },
       body: JSON.stringify(userData)
     })
+    .then(() => alert(`${userData.userName} was registered!`))
+    .then(this.toggleLoginForm)
   }
 
   signinUser = (userData) => {
@@ -118,8 +121,16 @@ class App extends Component {
     console.log(restaurantName)
   }
 
-  toggleLoginForm = (name) => {
-    console.log(name)
+  toggleLoginForm = () => {
+    if (this.state.loginDisplay === '/signin') {
+      this.setState({
+        loginDisplay: '/signup'
+      })
+    } else {
+      this.setState({
+        loginDisplay: '/signin'
+      })
+    }
   }
 
   componentDidMount = () => {
@@ -131,8 +142,22 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path='/signup' render={routerProps => <Signup {...routerProps} toggleForm={this.toggleLocationForm} handleSubmit={this.registerUser} />} />
-          <Route exact path='/signin' render={routerProps => signedIn ? <Redirect {...routerProps} to='/' /> : <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
+          <Route exact path='/signup' render={routerProps => {
+            if (this.state.loginDisplay === '/signin') {
+              return <Redirect {...routerProps} to={this.state.loginDisplay} />
+            } else {
+              return <Signup {...routerProps} toggleForm={this.toggleLoginForm} handleSubmit={this.registerUser} />
+            }
+          }} />
+          <Route exact path='/signin' render={routerProps => {
+            if (signedIn) {
+              return <Redirect {...routerProps} to="/" />
+            } else if (this.state.loginDisplay === '/signup') {
+              return <Redirect {...routerProps} to={this.state.loginDisplay} />
+            } else {
+              return <Signin {...routerProps} toggleForm={this.toggleLoginForm} error={this.state.error} handleSubmit={this.signinUser} />;
+            }
+           }} />
           <Route exact path='/' render={routerProps => {
             if (!signedIn) {
               return <Redirect {...routerProps} to='/signin' />

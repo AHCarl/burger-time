@@ -26,7 +26,7 @@ export default class Signup extends React.Component {
             <Grid columns={2}>
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <LoginMenu form='signup' toggleForm={this.props.toggleForm} ></LoginMenu>
+                        <LoginMenu activeItem='signup' toggleForm={this.props.toggleForm} ></LoginMenu>
                     </Grid.Column>
                     <Grid.Column width={6}>
                         <Form onSubmit={(e) => {

@@ -44,7 +44,7 @@ export default class Signin extends React.Component {
             <Grid columns={2}>
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <LoginMenu form='signin' toggleForm={this.props.toggleForm} ></LoginMenu>
+                        <LoginMenu activeItem='signin' toggleForm={this.props.toggleForm} ></LoginMenu>
                     </Grid.Column>
                     <Grid.Column width={6}>
                         {this.displayError()}
