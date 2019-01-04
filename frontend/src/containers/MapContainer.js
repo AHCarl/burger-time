@@ -20,7 +20,7 @@ export default class MapContainer extends React.Component {
             <div style={{ height: '80vh', width: '100%', float: 'right', filter: 'drop-shadow(16px 16px 10px black)' }}>
                 <GoogleMapReact bootstrapURLKeys={{ key: API_KEY }} center={this.props.coords} zoom={14} >
                     {this.displayPlaces(this.props.places)}
-                    {this.displayUserLocation(this.props.coords)}
+                    {/* {this.displayUserLocation(this.props.coords)} */}
                 </GoogleMapReact>
             </div>
         )
