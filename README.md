@@ -40,6 +40,3 @@ isn't it obvious
 1. DONE - address re-render working properly 
 2. DONE - start building React component to handle each Place
 3. DONE - Get signin/signup redirects working upon menu clicks
-
-4. Get Directions API working, render change to map upon button click
-5. Make NavBar/User info area pretty

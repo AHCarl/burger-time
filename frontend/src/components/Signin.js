@@ -24,22 +24,6 @@ export default class Signin extends React.Component {
     }
 
     render() {
-        // return (
-        //     <div>
-        //         {this.displayError()}
-        //         <form onSubmit={e => {
-        //             e.preventDefault()
-        //             this.props.handleSubmit(this.state)
-        //         }} >
-        //             <label>Email: </label>
-        //             <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} />
-        //             <label>Password: </label>
-        //             <input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
-        //             <button type="submit" >Sign In</button>
-        //         </form>
-        //     </div>
-        // )
-
         return (
             <Grid columns={2}>
                 <Grid.Row>

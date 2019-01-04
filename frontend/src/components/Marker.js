@@ -1,11 +1,23 @@
 import React from 'react'
+// import { Marker } from 'google-map-react'
 
 export default class Marker extends React.Component {
+
     render() {
+        let width, height;
+
+        if (this.props.img === 'https://static.thenounproject.com/png/710584-200.png') {
+            width = '40px'
+            height = '40px'
+        } else {
+            width = "25px";
+            height = "25px";
+        }
+
         return (
             <div>
                 {this.props.rank}
-                <img width='20px' height='20px' src='https://freeiconshop.com/wp-content/uploads/edd/burger-outline-filled.png' alt='burger'/>
+                <img width={width} height={height} src={this.props.img} alt='burger'/>
             </div>
         )
     }
