@@ -1,6 +1,7 @@
 const jwt = require('jwt-simple')
 const User = require('../models/User')
 const config = require('../config/keys')
+const googleMapsClient = require("../googleApi/googleMapsClient");
 
 const tokenForUser = (user) => {
   const timestamp = new Date().getTime()
@@ -20,9 +21,10 @@ exports.signup = (req, res, next) => {
   const email = req.body.email
   const userName = req.body.userName
   const password = req.body.password
+  const address = req.body.address
 
-  if (!email || !userName || !password) {
-    return res.status(422).send({ error: 'You must provide an email, username, and password.' })
+  if (!email || !userName || !password || !address) {
+    return res.status(422).send({ error: 'You must provide an email, username, password, and address.' })
   }
 
   User.findOne({ email: email }, (err, existingUser) => {
@@ -33,10 +35,21 @@ exports.signup = (req, res, next) => {
       return res.status(422).send({ error: 'Email is already in use.'})
     }
 
+    // const user = new User({
+    //   email: email,
+    //   password: password,
+    //   userName: userName,
+    //   address: address
+    // })
+
     const user = new User({
       email: email,
       password: password,
-      userName: userName
+      userName: userName,
+      location: {
+        address: address
+      },
+      burgers: []
     })
 
     user.save((err) => {
@@ -47,5 +60,7 @@ exports.signup = (req, res, next) => {
       token = tokenForUser(user)
       res.json({token: token})
     })
+
+    User.update(user, address);
   })
 }

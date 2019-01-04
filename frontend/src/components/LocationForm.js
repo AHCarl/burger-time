@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form, Button } from 'semantic-ui-react'
 
 export default class LocationForm extends React.Component {
 
@@ -23,15 +24,17 @@ export default class LocationForm extends React.Component {
 
     render() {
         return (
-            <form className="App" onSubmit={(e) => {
+            <Form onSubmit={(e) => {
                 e.preventDefault()
                 this.props.handleSubmit(this.state.newAddress);
                 this.clearInput()
             }} >
-                <label>Change Address:</label>
-                <input value={this.state.newAddress} onChange={this.handleInputChange} />
-                <button type='submit'>Submit</button>
-            </form>
+                <Form.Field>
+                    <label>Change Address:</label>
+                    <input value={this.state.newAddress} onChange={this.handleInputChange} placeholder='Address' />
+                </Form.Field>
+                <Button type='submit'>Submit</Button>
+            </Form>
         )
     }
 }

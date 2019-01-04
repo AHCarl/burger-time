@@ -65,7 +65,7 @@ ModelClass.update = (user, newAddress, res) => {
                     console.log(err);
                 } else {
                     user.location = location
-                    res.status(200).json(user);
+                    !!res && res.status(200).json(user);
                 }
             })
         }

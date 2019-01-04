@@ -1,4 +1,6 @@
 import React from 'react'
+import { Grid, Form, Button } from 'semantic-ui-react'
+import LoginMenu from './LoginMenu'
 
 export default class Signup extends React.Component {
 
@@ -7,7 +9,8 @@ export default class Signup extends React.Component {
         this.state = {
             email: '',
             userName: '',
-            password: ''
+            password: '',
+            address: ''
         }
     }
 
@@ -20,18 +23,37 @@ export default class Signup extends React.Component {
 
     render() {
         return (
-            <form onSubmit={e => {
-                e.preventDefault()
-                this.props.handleSubmit(this.state)
-            }} >
-                <label>Email: </label>
-                <input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
-                <label>Username: </label>
-                <input name="userName" value={this.state.userName} onChange={this.handleInputChange} />
-                <label>Password: </label>
-                <input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
-                <button type="submit" >Sign Up</button>
-            </form>
+            <Grid columns={2}>
+                <Grid.Row>
+                    <Grid.Column width={2}>
+                        <LoginMenu form='signup' toggleForm={this.props.toggleForm} ></LoginMenu>
+                    </Grid.Column>
+                    <Grid.Column width={6}>
+                        <Form onSubmit={(e) => {
+                            e.preventDefault()
+                            this.props.handleSubmit(this.state)
+                        }} >
+                            <Form.Field>
+                                <label>Username: </label>
+                                <input name="userName" value={this.state.userName} onChange={this.handleInputChange} placeholder="Username" />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Address: </label>
+                                <input name="address" value={this.state.address} onChange={this.handleInputChange} placeholder="Address" />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Email: </label>
+                                <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} placeholder="Email" />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Password: </label>
+                                <input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" />
+                            </Form.Field>
+                            <Button type='submit'>Sign Up</Button>
+                        </Form>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         )
     }
 }
