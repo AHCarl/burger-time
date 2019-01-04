@@ -119,6 +119,7 @@ class App extends Component {
   getDirections = (restaurantName) => {
     // PUT DIRECTIONS API LOGIC HERE
     console.log(restaurantName)
+    alert('Look it up yourself!')
   }
 
   toggleLoginForm = () => {
