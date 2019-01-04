@@ -19,10 +19,6 @@ class App extends Component {
         email: "",
         password: "",
         userName: "",
-        preferences: {
-          time: 0,
-          price: 0
-        },
         location: {
           address: "",
           coords: {
