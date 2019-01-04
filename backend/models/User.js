@@ -72,4 +72,15 @@ ModelClass.update = (user, newAddress, res) => {
     })
 }
 
+//hardcoded for testing purposes 
+googleMapsClient.placesNearby({location: "29.7590859,-95.3636325",
+type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
+maxprice: 2, opennow: true}, (err, resp) => {
+    if (!err) {
+        console.log(resp.json)
+    }
+}
+)
+// myBurgers()
+
 module.exports = ModelClass
