@@ -62,6 +62,8 @@ class App extends Component {
       },
       body: JSON.stringify(userData)
     })
+    .then(() => alert(`${userData.userName} was registered!`))
+    .then(this.toggleLoginForm)
   }
 
   signinUser = (userData) => {
