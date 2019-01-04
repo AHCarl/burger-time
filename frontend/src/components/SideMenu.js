@@ -16,7 +16,7 @@ export default class SideMenu extends React.Component {
             case ('Logout'):
                 this.props.logout()
                 break;
-            case ('Change Address'):
+            case ('Change Location'):
                 this.props.toggleAddressForm()
                 break;
             case ('Burger Time'):
@@ -29,7 +29,7 @@ export default class SideMenu extends React.Component {
         return(
             <Menu fluid vertical tabular>
                 <Menu.Item name='Burger Time' active={this.props.activeItem === 'Burger Time'} onClick={this.handleItemClick} />
-                <Menu.Item name='Change Address' active={this.props.activeItem === 'Change Address'} onClick={this.handleItemClick} />
+                <Menu.Item name='Change Location' active={this.props.activeItem === 'Change Location'} onClick={this.handleItemClick} />
                 <Menu.Item name='Logout' active={this.props.activeItem === 'Logout'} onClick={this.handleItemClick} />
             </Menu>
         )
