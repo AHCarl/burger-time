@@ -1,4 +1,5 @@
 import React from 'react'
+// import { Marker } from 'google-map-react'
 
 export default class Marker extends React.Component {
     render() {
