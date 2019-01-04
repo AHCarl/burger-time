@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import '../stylesheets/App.css';
-import LocationForm from './LocationForm'
+// import LocationForm from './LocationForm'
 import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
@@ -118,8 +118,8 @@ class App extends Component {
     console.log(restaurantName)
   }
 
-  toggleLocationForm = () => {
-
+  toggleLocationForm = (name) => {
+    console.log(name)
   }
 
   componentDidMount = () => {
@@ -131,7 +131,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path='/signup' render={routerProps => <Signup {...routerProps} handleSubmit={this.registerUser} />} />
+          <Route exact path='/signup' render={routerProps => <Signup {...routerProps} toggleForm={this.toggleLocationForm} handleSubmit={this.registerUser} />} />
           <Route exact path='/signin' render={routerProps => signedIn ? <Redirect {...routerProps} to='/' /> : <Signin {...routerProps} error={this.state.error} handleSubmit={this.signinUser} />} />
           <Route exact path='/' render={routerProps => {
             if (!signedIn) {
