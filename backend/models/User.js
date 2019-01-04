@@ -53,13 +53,14 @@ const ModelClass = mongoose.model('users', userSchema)
 
 
 ModelClass.update = (user, newAddress, res) => {
+    let myLocation
     googleMapsClient.geocode({address: newAddress}).asPromise()
     .then((resp) => {
-        const location = {
+        myLocation = {
                             address: resp.json.results[0].formatted_address,
                             coords: resp.json.results[0].geometry.location
                         }
-        return location
+        return myLocation
         // ModelClass.findOneAndUpdate({email: user.email}, {location: location}, (err, user) => {
         //     if (err) { 
         //         console.log(err);
@@ -70,8 +71,8 @@ ModelClass.update = (user, newAddress, res) => {
         // })
     })
     .then((resp) => {
-        let location = [resp.coords.lat, resp.coords.lng]
-        googleMapsClient.placesNearby({location: location,
+        let loc = [resp.coords.lat, resp.coords.lng]
+        googleMapsClient.placesNearby({location: loc,
         type: "restaurant", keyword: "hamburger,burger,burgers", rankby: "distance",
         maxprice: 2, opennow: true}).asPromise()
         .then((re) => {
@@ -82,8 +83,8 @@ ModelClass.update = (user, newAddress, res) => {
                 burg.location = place.geometry.location
                 return burg
             })
-            location.push(burgs)
-            return location
+            loc.push(burgs)
+            return loc
         })
         .then( r => {
             let origins = [`${r[0]},${r[1]}`]
@@ -102,11 +103,12 @@ ModelClass.update = (user, newAddress, res) => {
                     myBurgers[i].time = response.json.rows[0].elements[i].duration.text
                 }
 
-                ModelClass.findOneAndUpdate({email: user.email}, {location: location, burgers: myBurgers}, (err, user) => {
+                ModelClass.findOneAndUpdate({email: user.email}, {location: myLocation, burgers: myBurgers}, (err, user) => {
                     if (err) { 
                         console.log(err);
                     } else {
-                        user.location = location
+                        console.log(myLocation)
+                        user.location = myLocation
                         user.burgers = myBurgers
                         !!res && res.status(200).json(user);
                     }
