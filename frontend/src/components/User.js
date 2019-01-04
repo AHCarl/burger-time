@@ -6,8 +6,8 @@ class User extends Component {
   render() {
     return (
       <div className="App">
-        <p>Hello, {this.props.user.userName}!</p>
-        <p>Address: {this.props.user.location.address}</p>
+        <p>Hello, {this.props.user.userName}! You are located at: {this.props.user.location.address}</p>
+        <br/>
       </div>
     );
   }

@@ -25,7 +25,7 @@ export default class BurgersContainer extends React.Component {
 
     locationFormToggle = () => {
         if (this.state.display === 'Burger Time') {
-            this.setState({display: 'Change Address'})
+            this.setState({display: 'Change Location'})
         } else {
             this.setState({display: 'Burger Time'})
         }
