@@ -5,7 +5,6 @@ import User from './User'
 import Signup from './Signup'
 import Signin from './Signin'
 import BurgersContainer from '../containers/BurgersContainer'
-import Places from "../api/places";
 
 const usersApiUrl = "http://localhost:5000/api/users";
 const userApiUrl = "http://localhost:5000/api/user"

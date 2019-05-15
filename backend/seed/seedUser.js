@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/burger-time-db",{ useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/burgertime",{ useNewUrlParser: true });
 
 const User = require("../models/User");
 const googleMapsClient = require("../googleApi/googleMapsClient");
