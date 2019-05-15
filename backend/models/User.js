@@ -105,9 +105,9 @@ ModelClass.update = (user, newAddress, res) => {
                         console.log(myLocation)
                         user.location = myLocation
                         user.burgers = myBurgers.sort((a,b) => {
-                            if (a.time > b.time) {
+                            if (parseInt(a.time) > parseInt(b.time)) {
                                 return 1
-                            } else if (a.time < b.time) {
+                            } else if (parseInt(a.time) < parseInt(b.time)) {
                                 return -1
                             } else {
                                 return 0
