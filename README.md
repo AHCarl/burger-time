@@ -3,6 +3,7 @@ Answers a very simple question: how much time stands between me and a juicy burg
 
 MERN stack SPA built as my module 4 project at Flatiron School, Houston, TX, in collaboration with https://github.com/itslimatime42. Originally presented 4 January 2019.
 
+[embed video here]
 
 # BACKEND
 - Node.js with Express
